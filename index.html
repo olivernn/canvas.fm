@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas Disc</title>
+  </head>
+  <body>
+    <audio id="audio"
+           src="/media/dance_hall_days.ogg"
+           controls="true"
+           style="width: 512px;">
+    </audio>
+
+    <canvas id="display" width="512" height="200"></canvas>
+
+    <script src="/javascripts/dsp.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      var channels, rate, frameBufferLength, fft,
+          audio = document.getElementById('audio'),
+          canvas = document.getElementById('display'),
+          ctx = canvas.getContext('2d');
+
+      var loadedMetaData = function () {
+        channels = audio.mozChannels
+        rate = audio.mozSampleRate
+        frameBufferLength = audio.mozFrameBufferLength
+
+        fft = new FFT (frameBufferLength / channels, rate)
+      }
+
+      var audioAvailable = function (event) {
+        var frameBuffer = event.frameBuffer,
+            time = event.time,
+            signal = new Float32Array(frameBuffer.length / channels),
+            magnitude;
+
+        for (var i=0, fbl = frameBufferLength / 2; i < fbl; i++) {
+          signal[i] = (frameBuffer[2*i] + frameBuffer[2*i+1]) / 2
+        };
+
+        fft.forward(signal)
+
+        ctx.clearRect(0,0, canvas.width, canvas.height)
+
+        for (var i=0; i < fft.spectrum.length; i++) {
+          magnitude = fft.spectrum[i] * 4000
+          ctx.fillRect(i * 4, canvas.height, 3, -magnitude)
+        };
+      }
+
+      audio.addEventListener('MozAudioAvailable', audioAvailable, false);
+      audio.addEventListener('loadedmetadata', loadedMetaData, false);
+    </script>
+  </body>
+</html>
