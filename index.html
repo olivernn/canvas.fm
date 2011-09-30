@@ -14,53 +14,18 @@
 
     <canvas id="circle" width="1024" height="1024"></canvas>
 
-
     <script src="/javascripts/dsp.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/audio.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/canvas.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript" charset="utf-8">
-      var channels, rate, frameBufferLength, fft,
-          audio = document.getElementById('audio'),
-          circle = document.getElementById('circle'),
-          circleCtx = circle.getContext('2d'),
-          duration = 485.773061,  // for this song at least!
-          prevTime = 0;
+      audio.init()
+      canvas.init()
 
-      circleCtx.translate(512, 512)
-
-      var loadedMetaData = function () {
-        channels = audio.mozChannels
-        rate = audio.mozSampleRate
-        frameBufferLength = audio.mozFrameBufferLength
-
-        fft = new FFT (frameBufferLength / channels, rate)
-      }
-
-      var audioAvailable = function (event) {
-        var frameBuffer = event.frameBuffer,
-            time = event.time,
-            signal = new Float32Array(frameBuffer.length / channels),
-            intensity;
-
-        var delta = time - prevTime
-        prevTime = time
-
-        for (var i=0, fbl = frameBufferLength / 2; i < fbl; i++) {
-          signal[i] = (frameBuffer[2*i] + frameBuffer[2*i+1]) / 2
-        };
-
-        fft.forward(signal)
-
-        circleCtx.rotate((delta / duration) * (Math.PI * 2))
-
-        for (var i=0; i < fft.spectrum.length; i++) {
-          intensity = fft.spectrum[i] * 10
-          circleCtx.fillStyle = 'rgba(0,0,0, ' + intensity + ')'
-          circleCtx.fillRect(512 - i, 0, 1, 1)
-        };
-      }
-
-      audio.addEventListener('MozAudioAvailable', audioAvailable, false);
-      audio.addEventListener('loadedmetadata', loadedMetaData, false);
+      audio.onSample(function (sample, delta) {
+        canvas.rotate((delta / audio.duration) * (Math.PI * 2))
+        canvas.draw(sample)
+      })
     </script>
   </body>
 </html>
