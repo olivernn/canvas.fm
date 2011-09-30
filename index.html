@@ -2,17 +2,33 @@
 <html>
   <head>
     <title>Canvas Disc</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="screen" charset="utf-8">
   </head>
   <body>
-    <audio id="audio"
-           src="/media/dance_hall_days.ogg"
-           controls="true"
-           preload
-           autobuffer
-           style="width: 512px;">
-    </audio>
+    <div id="wrap">
+      <header>
+        <h1>Canvas Disc</h1>
+      </header>
 
-    <canvas id="circle" width="1024" height="1024"></canvas>
+      <section id="canvas-container" class="paused">
+        <img id="play" src="/images/play.png"></img>
+        <canvas id="circle" width="1024" height="1024"></canvas>
+      </section>
+
+      <section class="audio-container">
+        <audio id="audio"
+               src="/media/dance_hall_days.ogg"
+               controls="true"
+               preload
+               autobuffer>
+        </audio>
+      </section>
+    </div>
+
+    <footer>
+      
+    </footer>
+    <!-- scripts -->
 
     <script src="/javascripts/dsp.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/audio.js" type="text/javascript" charset="utf-8"></script>

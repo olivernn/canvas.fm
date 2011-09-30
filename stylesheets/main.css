@@ -1,0 +1,56 @@
+body {
+  font-family: helvetica;
+}
+
+#wrap {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+header h1 {
+  border-top: 3px solid black;
+  padding-top: 10px;
+  font-size: 2.2em;
+}
+
+.audio-container {
+  display: none;
+}
+
+header .controls {
+  float: right;
+  margin-top: 10px;
+}
+
+header .controls a {
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  padding-top: 15px;
+  width: 50px;
+  height: 33px;
+  border-radius: 50px;
+}
+
+#canvas-container.paused #play {
+  display: block;
+}
+
+#canvas-container.playing #play {
+  display: none;
+}
+
+#canvas-container.paused #circle {
+  display: none;
+}
+
+#canvas-container.playing #circle {
+  display: block;
+}
+
+#play {
+  margin:100px auto;
+}
