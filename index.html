@@ -10,7 +10,9 @@
            style="width: 512px;">
     </audio>
 
-    <canvas id="display" width="512" height="200"></canvas>
+    <canvas id="circle" width="1024" height="1024"></canvas>
+    <canvas id="display" width="512" height="400"></canvas>
+
 
     <script src="/javascripts/dsp.js" type="text/javascript" charset="utf-8"></script>
 
@@ -18,7 +20,13 @@
       var channels, rate, frameBufferLength, fft,
           audio = document.getElementById('audio'),
           canvas = document.getElementById('display'),
-          ctx = canvas.getContext('2d');
+          ctx = canvas.getContext('2d'),
+          circle = document.getElementById('circle'),
+          circleCtx = circle.getContext('2d'),
+          count=0,
+          step = (Math.PI * 2 / 50000000);
+
+      circleCtx.translate(512, 512)
 
       var loadedMetaData = function () {
         channels = audio.mozChannels
@@ -34,17 +42,26 @@
             signal = new Float32Array(frameBuffer.length / channels),
             magnitude;
 
+        count++
+
         for (var i=0, fbl = frameBufferLength / 2; i < fbl; i++) {
           signal[i] = (frameBuffer[2*i] + frameBuffer[2*i+1]) / 2
         };
 
         fft.forward(signal)
 
-        ctx.clearRect(0,0, canvas.width, canvas.height)
+        // ctx.clearRect(0,0, canvas.width, canvas.height)
+
+        circleCtx.rotate(step * count)
 
         for (var i=0; i < fft.spectrum.length; i++) {
+          // normal eq
           magnitude = fft.spectrum[i] * 4000
-          ctx.fillRect(i * 4, canvas.height, 3, -magnitude)
+          // ctx.fillRect(i * 4, canvas.height, 3, -magnitude)
+
+          // circle eq
+          circleCtx.fillStyle = 'rgba(0,0,0, ' + fft.spectrum[i] * 10 + ')'
+          circleCtx.fillRect(512 - i, 0, 1, 1)
         };
       }
 
