@@ -10,7 +10,7 @@ var canvas = (function () {
     for (var i=0; i < sample.length; i++) {
       intensity = sample[i] * 10
       ctx.fillStyle = 'rgba(0,0,0, ' + intensity + ')'
-      ctx.fillRect(512 - i, 0, 1, 1)
+      ctx.fillRect(0, 512 - i, 1, 1)
     };
   }
 
@@ -22,6 +22,7 @@ var canvas = (function () {
     _canvas = document.getElementById('circle')
     ctx = _canvas.getContext('2d')
     ctx.translate(512, 512)
+    ctx.rotate(Math.PI)
   }
 
   return {
