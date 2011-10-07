@@ -4,9 +4,7 @@
 }
 
 #search #search-input {
-  width: 440px;
-  font-size: 1.4em;
-  -webkit-appearance: none;
+  width: 230px;
   border: 1px solid #ccc;
   padding: 5px;
   border-radius: 2px;
@@ -14,16 +12,13 @@
 }
 
 #search input[type=submit] {
-  width: 50px;
-  height: 38px;
-  border: none;
+  border: 1px solid #333;
   background-color: #333;
-  font-size: 1.4em;
-  padding: 0px;
+  padding: 5px;
   margin: 0px;
   color: white;
   font-weight: bold;
   border-radius: 2px;
   -moz-border-radius: 2px;
-  
+  cursor: pointer;
 }
