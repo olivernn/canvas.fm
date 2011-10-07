@@ -4,12 +4,14 @@ var http = require("http"),
     fs = require("fs")
     port = process.argv[2] || 8003,
     Converter = require('./lib/converter'),
-    track = require('./lib/track'),
+    Track = require('./lib/track'),
     pathRegex = /^\/stream\/(\d+)/;
 
 http.createServer(function (req, res) {
   var uri = url.parse(req.url).pathname,
       filename = path.join(process.cwd(), uri);
+
+  console.log(uri)
 
   var respondWith404 = function () {
     res.writeHead(404, {"Content-Type": "text/plain"})
@@ -29,9 +31,10 @@ http.createServer(function (req, res) {
     res.writeHead(200, {"Content-Type": "application/ogg"})
 
     var trackId = matcher[1],
-        converter = Converter.create()
+        converter = Converter.create(),
+        track = Track.create(trackId);
   
-    track.get(trackId, function (data) {
+    track.get(function (data) {
       converter.send(data)
     })
 
@@ -39,9 +42,6 @@ http.createServer(function (req, res) {
       res.write(data, 'binary')
     })
 
-    converter.onComplete(function () {
-      res.end()
-    })
   } else {
     path.exists(filename, function (exists) {
       if (!exists) return respondWith404()
