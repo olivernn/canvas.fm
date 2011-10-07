@@ -5,7 +5,7 @@ var audio = (function () {
       frameBufferLength,
       fft,
       elem,
-      duration = 485.773061, // hardcoded for now!
+      _duration,
       prevTime = 0,
       onSampleCallback = function () {},
       container;
@@ -52,6 +52,16 @@ var audio = (function () {
     alert('sdfghj')
   }
 
+  var loadTrack = function (track) {
+    elem.src = track.src()
+    _duration = track.duration()
+    play()
+  }
+
+  var duration = function () {
+    return _duration
+  }
+
   var init = function () {
     container = document.getElementById('canvas-container')
 
@@ -67,6 +77,7 @@ var audio = (function () {
   return {
     init: init,
     onSample: onSample,
-    duration: duration
+    duration: duration,
+    loadTrack: loadTrack
   }
 })()

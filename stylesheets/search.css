@@ -1,0 +1,29 @@
+#search {
+  float: right;
+  padding-top: 14px;
+}
+
+#search #search-input {
+  width: 440px;
+  font-size: 1.4em;
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+}
+
+#search input[type=submit] {
+  width: 50px;
+  height: 38px;
+  border: none;
+  background-color: #333;
+  font-size: 1.4em;
+  padding: 0px;
+  margin: 0px;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  
+}

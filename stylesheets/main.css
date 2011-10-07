@@ -1,16 +1,22 @@
 body {
   font-family: helvetica;
+  color: #333;
 }
 
 #wrap {
   width: 1024px;
-  margin: 0 auto;
+  margin: 20px auto;
+  position: relative;
+}
+
+header {
+  border-top: 3px solid #333;
+  margin-bottom: 10px;
 }
 
 header h1 {
-  border-top: 3px solid black;
-  padding-top: 10px;
-  font-size: 2.2em;
+  margin-top: 12px;
+  font-size: 2.6em;
 }
 
 .audio-container {
