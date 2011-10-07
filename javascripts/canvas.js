@@ -14,15 +14,20 @@ var canvas = (function () {
     };
   }
 
+  var toPng = function () {
+    return _canvas.toDataURL('image/png')
+  }
+
   var init = function () {
-    _cvas = document.getElementById('circle')
-    ctx = _cvas.getContext('2d')
+    _canvas = document.getElementById('circle')
+    ctx = _canvas.getContext('2d')
     ctx.translate(512, 512)
   }
 
   return {
     init: init,
     draw: draw,
-    rotate: rotate
+    rotate: rotate,
+    toPng: toPng
   }
 })()
