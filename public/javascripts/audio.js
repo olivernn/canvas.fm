@@ -53,6 +53,7 @@ var audio = (function () {
   }
 
   var loadTrack = function (track) {
+    prevTime = 0
     elem.src = track.src()
     _duration = track.duration()
     play()
