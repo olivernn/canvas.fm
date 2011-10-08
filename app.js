@@ -1,5 +1,6 @@
 var express = require('express'),
     app = express.createServer(),
+    util = require('util'),
     Converter = require('./lib/converter'),
     Track = require('./lib/track'),
     pathRegex = /^\/stream\/(\d+)/,
@@ -25,22 +26,15 @@ app.get('/', sendMainPage)
 app.get('/tracks/:id', sendMainPage)
 app.get('/search', sendMainPage)
 
-app.get('/stream/:track_id', function (req, res) {
-  var track = Track.create(req.params['track_id']),
+app.get('/stream/:track_id', function (request, response) {
+  var track = Track.create(request.params['track_id']),
       converter = Converter.create();
 
-  res.contentType('application/ogg')
+  response.contentType('application/ogg')
 
-  track.get(function (data) {
-    converter.send(data)
-  })
-
-  converter.onData(function (data) {
-    res.write(data)
-  })
-
-  converter.onComplete(function () {
-    res.end()
+  track.get(function (trackStream) {
+    util.pump(trackStream, converter.process.stdin)
+    util.pump(converter.process.stdout, response)
   })
 })
 
