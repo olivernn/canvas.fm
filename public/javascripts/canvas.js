@@ -18,17 +18,25 @@ var canvas = (function () {
     return _canvas.toDataURL('image/png')
   }
 
+  var reset = function () {
+    ctx.restore()
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0,0,1024,1024)
+  }
+
   var init = function () {
     _canvas = document.getElementById('circle')
     ctx = _canvas.getContext('2d')
     ctx.translate(512, 512)
     ctx.rotate(Math.PI)
+    ctx.save()
   }
 
   return {
     init: init,
     draw: draw,
     rotate: rotate,
-    toPng: toPng
+    toPng: toPng,
+    reset: reset
   }
 })()

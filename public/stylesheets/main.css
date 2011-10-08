@@ -19,6 +19,11 @@ header h1 {
   font-size: 2.6em;
 }
 
+header h1 a {
+  text-decoration: none;
+  color: #333;
+}
+
 .audio-container {
   display: none;
 }

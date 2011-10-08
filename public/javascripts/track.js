@@ -8,6 +8,18 @@ Track = (function () {
     this.attributes = attributes
   }
 
+  Track.find = function (id) {
+    var deferred = new Deferred (),
+        path = ['/tracks/', id].join('');
+
+    // should look in some internal cache first!
+    SC.get(path, function (data) {
+      deferred.resolve(new Track (data))
+    })
+
+    return deferred
+  }
+
   Track.search = function (q) {
     var deferred = new Deferred (),
         path = ['/tracks?q=', q].join('');

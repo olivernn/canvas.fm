@@ -2,7 +2,10 @@ var express = require('express'),
     app = express.createServer(),
     Converter = require('./lib/converter'),
     Track = require('./lib/track'),
-    pathRegex = /^\/stream\/(\d+)/;
+    pathRegex = /^\/stream\/(\d+)/,
+    sendMainPage = function (req, res) {
+      res.sendfile(__dirname + '/views/main.html')
+    };
 
 app.configure(function () {
   app.use(express.methodOverride());
@@ -18,13 +21,9 @@ app.configure('development', function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-app.get('/', function (req, res) {
-  res.sendFile('index.html')
-})
-
-app.get('/track/:id', function (req, res) {
-  res.sendFile('index.html')
-})
+app.get('/', sendMainPage)
+app.get('/tracks/:id', sendMainPage)
+app.get('/search', sendMainPage)
 
 app.get('/stream/:track_id', function (req, res) {
   var track = Track.create(req.params['track_id']),

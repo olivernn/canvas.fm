@@ -1,6 +1,6 @@
 search = (function () {
 
-  var elem, container, trackSelectedCallbacks = [], cachedTracks;
+  var container, trackSelectedCallbacks = [], cachedTracks;
 
   var tracksAsJSON = function (track) {
     return track.asJSON()
@@ -18,39 +18,23 @@ search = (function () {
       .show()
   }
 
-  var performSearch = function (e) {
-    e.preventDefault()
-    Track.search(elem.find('#search-input').val())
-      .then(cacheResults)
-      .then(displaySearchResults)
-  }
-
-  var onTrackSelected = function (fn) {
-    trackSelectedCallbacks.push(fn)
-  }
-
   var trackSelected = function (e) {
     var selectedTrackId = $(this).data('track-id'),
-        selectedTrack = cachedTracks.detect(function (track) {
-          return track.id() == selectedTrackId
-        })
+        request = new Davis.Request({
+          fullPath: '/tracks/' + selectedTrackId
+        });
 
+    Davis.location.assign(request)
     container.hide()
-
-    trackSelectedCallbacks.forEach(function (callback) {
-      callback.call(selectedTrack, selectedTrack)
-    })
   }
 
   var init = function () {
-    elem = $('#search')
-    elem.bind('submit', performSearch)
     container = $('#search-results-container')
     container.delegate('li', 'click', trackSelected)
   }
 
   return {
     init: init,
-    onTrackSelected: onTrackSelected
+    displayTracks: displaySearchResults,
   }
 })()
