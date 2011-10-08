@@ -59,7 +59,8 @@ header .controls a {
 }
 
 #play {
-  font-size: 1.6em;
-  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+/*  text-align: center;*/
   margin:100px auto;
 }

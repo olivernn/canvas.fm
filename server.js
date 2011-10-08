@@ -33,7 +33,7 @@ http.createServer(function (req, res) {
     var trackId = matcher[1],
         converter = Converter.create(),
         track = Track.create(trackId);
-  
+
     track.get(function (data) {
       converter.send(data)
     })

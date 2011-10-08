@@ -4,7 +4,7 @@
   left: 3px;
   border: 1px solid #aaa;
   background-color: #eee;
-  width: 1022px;
+  width: 1020px;
   display: none;
 }
 
@@ -21,6 +21,7 @@
   border-left: 1px solid #ccc;
   border-right: 1px solid #aaa;
   width: 243px;
+  height: 91px;
   font-size: 0.7em;
   padding: 5px;
   background-color: white;
@@ -42,6 +43,11 @@
   margin-top: 0px;
   padding-top: 0px;
   height: 50px;
+  font-size: 13px;
+}
+
+#search-results-container li h4 {
+  font-size: 11px;
 }
 
 #search-results-container h2 {
