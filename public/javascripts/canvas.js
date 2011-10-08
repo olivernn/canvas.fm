@@ -19,9 +19,9 @@ var canvas = (function () {
   }
 
   var reset = function () {
-    ctx.restore()
-    ctx.fillStyle = 'white'
-    ctx.fillRect(0,0,1024,1024)
+    _canvas.width = _canvas.width
+    ctx.translate(512, 512)
+    ctx.rotate(Math.PI)
   }
 
   var init = function () {
@@ -29,7 +29,6 @@ var canvas = (function () {
     ctx = _canvas.getContext('2d')
     ctx.translate(512, 512)
     ctx.rotate(Math.PI)
-    ctx.save()
   }
 
   return {
