@@ -33,8 +33,14 @@ app.get('/stream/:track_id', function (request, response) {
   response.contentType('application/ogg')
 
   track.get(function (trackStream) {
-    util.pump(trackStream, converter.process.stdin)
-    util.pump(converter.process.stdout, response)
+    trackStream.pipe(converter.process.stdin)
+    converter.process.stdout.pipe(response)
+  })
+
+  request.on('close', function () {
+    track.stop()
+    converter.kill()
+    response.end()
   })
 })
 
