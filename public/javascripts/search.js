@@ -10,12 +10,20 @@ search = (function () {
     cachedTracks = tracks
   }
 
+  var closeSearchResults = function () {
+    container.hide()
+  }
+
   var displaySearchResults = function (tracks) {
     container
       .html(poirot.searchResults({
         tracks: tracks.map(tracksAsJSON)
       }))
       .show()
+
+    $(window).one('keyup', function (e) {
+      if (e.keyCode == 27) closeSearchResults()
+    })
   }
 
   var trackSelected = function (e) {
@@ -25,7 +33,7 @@ search = (function () {
         });
 
     Davis.location.assign(request)
-    container.hide()
+    closeSearchResults()
   }
 
   var init = function () {
