@@ -63,6 +63,10 @@ Track = (function () {
       } else {
         return '/images/missing_artwork.png'
       };
+    },
+
+    fullTitle: function () {
+      return [this.attributes.title, this.artistName].join(' - ')
     }
   }
 

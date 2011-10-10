@@ -1,0 +1,55 @@
+#track-controls-container {
+  padding-left:3px;
+  position: relative;
+}
+
+#track-controls-container h2, #track-controls-container h3 {
+  display: inline;
+  text-transform: uppercase;
+}
+
+#track-controls-container h2 {
+  font-size: 1.2em;
+}
+
+#track-controls-container h3 {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+#track-controls-container .button {
+  display:inline-block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #333;
+  background-color: #333;
+  padding: 5px;
+  margin: 0px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+#track-controls-container .play {
+  background-image: url('/images/play.png');
+  background-position: 2px 2px;
+  right: 0px;
+  top: -10px;
+}
+
+#track-controls-container .pause {
+  background-image: url('/images/pause.png');
+  background-position: 0px 1px;
+  right: 0px;
+  top: -10px;
+}
+
+#track-controls-container .download {
+  background-image: url('/images/download.png');
+  background-position: 4px 5px;
+  right: 40px;
+  top: -10px;
+  text-indent: -9999px;
+}

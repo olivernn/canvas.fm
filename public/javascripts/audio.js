@@ -7,8 +7,7 @@ var audio = (function () {
       elem,
       _duration,
       prevTime = 0,
-      onSampleCallback = function () {},
-      container;
+      onSampleCallback = function () {};
 
   var loadedMetaData = function () {
     channels = elem.mozChannels
@@ -41,15 +40,10 @@ var audio = (function () {
 
   var play = function () {
     elem.play()
-    container.classList.remove('paused')
-    container.classList.add('playing')
   }
 
   var pause = function () {
     elem.pause()
-    container.classList.remove('playing')
-    container.classList.add('paused')
-    alert('sdfghj')
   }
 
   var loadTrack = function (track) {
@@ -64,21 +58,17 @@ var audio = (function () {
   }
 
   var init = function () {
-    container = document.getElementById('canvas-container')
-
     elem = document.getElementById('audio')
     elem.addEventListener('MozAudioAvailable', audioAvailable, false);
     elem.addEventListener('loadedmetadata', loadedMetaData, false);
-    elem.addEventListener('click', pause, true)
-
-    playButton = document.getElementById('play')
-    playButton.addEventListener('click', play, false)
   }
 
   return {
     init: init,
     onSample: onSample,
     duration: duration,
-    loadTrack: loadTrack
+    loadTrack: loadTrack,
+    play: play,
+    pause: pause
   }
 })()

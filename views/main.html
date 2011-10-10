@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Canvas Disc</title>
+    <title>Canvas.FM</title>
     <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/stylesheets/results.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="/stylesheets/track_display.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/track_controls.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/stylesheets/search.css" type="text/css" media="screen" charset="utf-8">
 
     <script id='search-results-template' type='text/mustache'>
@@ -26,10 +26,12 @@
       </ul>
     </script>
 
-    <script id='track-display-template' type='text/mustache'>
+    <script id='track-controls-template' type='text/mustache'>
       <div>
-        <h2>{{title}}</h2>
+        <h2>{{title}}</h2><span> : </span>
         <h3>{{artistName}}</h3>
+        <span title="pause track" class='button pause'></span>
+        <a href="#" class='button download' download target="_blank" title="download image">Download</a>
       </div>
     </script>
 
@@ -41,19 +43,14 @@
           <input id="search-input" name="query" type="text" placeholder="Search SoundCloud"></input>
           <input type="submit" value="Go">
         </form>
-        <h1><a href="/">Canvas Disc</a></h1>
+        <h1><a href="/">Canvas.fm</a></h1>
       </header>
 
       <section id="search-results-container"></section>
 
-      <section id="canvas-container" class="paused">
-        <div id="play">
-          <ol>
-            <li>Search for a track.</li>
-            <li>Select a track.</li>
-            <li>See pretty picture.</li>
-          </ol>
-        </div>
+      <section id="track-controls-container"></section>
+
+      <section id="canvas-container">
         <canvas id="circle" width="1024" height="1024"></canvas>
       </section>
 
@@ -83,7 +80,7 @@
     <script src="/javascripts/deferred.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/track.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/search.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/javascripts/track_display.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/track_controls.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/mustache.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/poirot.js" type="text/javascript" charset="utf-8"></script>
 
@@ -109,13 +106,14 @@
           Track.find(req.params['track_id'])
             .then(canvas.reset)
             .then(audio.loadTrack)
-            .then(trackDisplay.loadTrack)
+            .then(trackControls.loadTrack)
         })
 
         this.bind('start', function () {
           audio.init()
           canvas.init()
           search.init()
+          trackControls.init()
 
           audio.onSample(function (sample, delta) {
             canvas.rotate((delta / audio.duration()) * (Math.PI * 2))
