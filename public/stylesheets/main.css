@@ -47,9 +47,13 @@ header .controls a {
   border-radius: 50px;
 }
 
+footer {
+  border-top: 3px solid #333;
+}
+
 #canvas-container {
   display:block;
-  margin-top: 20px;
+  margin: 20px 0px;
 }
 
 canvas {
