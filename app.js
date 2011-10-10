@@ -44,8 +44,8 @@ app.get('/stream/:track_id', function (request, response) {
   })
 })
 
-app.put('/track/:id', function (req, res) {
-  
+app.put('/tracks/:id', function (req, res) {
+
 })
 
 app.listen(3000)
