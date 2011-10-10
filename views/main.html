@@ -11,9 +11,13 @@
       <ul>
         {{#tracks}}
           <li data-track-id="{{id}}">
-            <img src="{{artworkUrl}}"></img>
-            <h3>{{title}}</h3>
-            <h4>{{artistName}}</h4>
+            <div class="left">
+              <img src="{{artworkUrl}}"></img>
+            </div>
+            <div class="right">
+              <h3>{{title}}</h3>
+              <h4>{{artistName}}</h4>
+            </div>
           </li>
         {{/tracks}}
         {{^tracks}}

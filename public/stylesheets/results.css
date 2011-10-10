@@ -15,16 +15,26 @@
 }
 
 #search-results-container li {
-  float: left;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #aaa;
   border-left: 1px solid #ccc;
   border-right: 1px solid #aaa;
   width: 243px;
-  height: 91px;
+  height: 60px;
   font-size: 0.7em;
   padding: 5px;
   background-color: white;
+  float: left;
+}
+
+#search-results-container .left {
+  float: left;
+  width: 50px;
+}
+
+#search-results-container .right {
+  float: right;
+  width: 185px;
 }
 
 #search-results-container li:hover {
@@ -40,14 +50,16 @@
 }
 
 #search-results-container li h3 {
-  margin-top: 0px;
-  padding-top: 0px;
-  height: 50px;
+  margin-top:0px;
+  margin-bottom:5px;
+  padding:0;
   font-size: 13px;
 }
 
 #search-results-container li h4 {
   font-size: 11px;
+  margin:0;
+  padding:0;
 }
 
 #search-results-container h2 {
