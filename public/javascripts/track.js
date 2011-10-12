@@ -6,15 +6,19 @@ Track = (function () {
 
   var Track = function (attributes) {
     this.attributes = attributes
+    this._callbacks = {}
   }
 
-  Track.find = function (id) {
+  Track.load = function (id) {
     var deferred = new Deferred (),
         path = ['/tracks/', id].join('');
 
     // should look in some internal cache first!
     SC.get(path, function (data) {
-      deferred.resolve(new Track (data))
+      var track = new Track (data)
+
+      Track.trigger('loaded', track)
+      deferred.resolve(track)
     })
 
     return deferred
@@ -25,12 +29,26 @@ Track = (function () {
         path = ['/tracks?q=', q].join('');
 
     SC.get(path, function (data) {
-      deferred.resolve(data.map(function (attrs) {
-        return new Track (attrs)
-      }))
+      var tracks = data.map(function (attrs) { return new Track (attrs) })
+
+      Track.trigger('searched', tracks)
+      deferred.resolve(tracks)
     })
 
     return deferred
+  }
+
+  Track._callbacks = {}
+
+  Track.bind = function (eventName, fn) {
+    this._callbacks[eventName] = this._callbacks[eventName] || []
+    this._callbacks[eventName].push(fn)
+  }
+
+  Track.trigger = function (eventName, data) {
+    Array.wrap(this._callbacks[eventName]).forEach(function (callback) {
+      callback(data)
+    })
   }
 
   Track.prototype = {
@@ -67,6 +85,18 @@ Track = (function () {
 
     fullTitle: function () {
       return [this.attributes.title, this.artistName].join(' - ')
+    },
+
+    play: function () {
+      Array.wrap(this._callbacks.play).forEach(function (cb) { cb() })
+    },
+
+    pause: function () {
+      Array.wrap(this._callbacks.paused).forEach(function (cb) { cb() })
+    },
+
+    bind: function (eventName, cb) {
+      Track.bind.call(this, eventName, cb)
     }
   }
 

@@ -7,7 +7,7 @@ var audio = (function () {
       elem,
       _duration,
       prevTime = 0,
-      onSampleCallback = function () {};
+      currentTrack;
 
   var loadedMetaData = function () {
     channels = elem.mozChannels
@@ -31,11 +31,8 @@ var audio = (function () {
 
     fft.forward(signal)
 
-    onSampleCallback(fft.spectrum, delta)
-  }
-
-  var onSample = function (fn) {
-    onSampleCallback = fn
+    canvas.rotate((delta / currentTrack.duration()) * (Math.PI * 2))
+    canvas.draw(fft.spectrum)
   }
 
   var play = function () {
@@ -47,27 +44,33 @@ var audio = (function () {
   }
 
   var loadTrack = function (track) {
+    currentTrack = track
     prevTime = 0
-    elem.src = track.src()
-    _duration = track.duration()
-    play()
+    elem.src = currentTrack.src()
+
+    canvas.reset()
+
+    currentTrack.bind('play', play)
+    currentTrack.bind('paused', pause)
+
+    currentTrack.play()
   }
 
-  var duration = function () {
-    return _duration
+  var audioEnded = function () {
+    // stuff that happens when the audio has ended
   }
 
   var init = function () {
     elem = document.getElementById('audio')
     elem.addEventListener('MozAudioAvailable', audioAvailable, false);
     elem.addEventListener('loadedmetadata', loadedMetaData, false);
+    elem.addEventListener('ended', audioEnded, false)
+
+    Track.bind('loaded', loadTrack)
   }
 
   return {
     init: init,
-    onSample: onSample,
-    duration: duration,
-    loadTrack: loadTrack,
     play: play,
     pause: pause
   }

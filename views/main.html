@@ -70,9 +70,9 @@
     <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="http://connect.soundcloud.com/2/latest.min.js" type="text/javascript"></script>
-    <script src="https://raw.github.com/olivernn/davis.js/master/dist/davis-0.6.1.min.js" type="text/javascript" charset="utf-8"></script>
 
     <script src="/javascripts/supplement-0.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/davis-0.6.2.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/dsp.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/audio.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/canvas.js" type="text/javascript" charset="utf-8"></script>
@@ -98,14 +98,10 @@
 
         this.get('/search', function (req) {
           Track.search(req.params['query'])
-            .then(search.displayTracks)
         })
 
         this.get('/tracks/:track_id', function (req) {
-          Track.find(req.params['track_id'])
-            .then(canvas.reset)
-            .then(audio.loadTrack)
-            .then(trackControls.loadTrack)
+          Track.load(req.params['track_id'])
         })
 
         this.bind('start', function () {
@@ -113,11 +109,6 @@
           canvas.init()
           search.init()
           trackControls.init()
-
-          audio.onSample(function (sample, delta) {
-            canvas.rotate((delta / audio.duration()) * (Math.PI * 2))
-            canvas.draw(sample)
-          })
         })
       })
 

@@ -16,7 +16,7 @@ trackControls = (function () {
       .addClass('pause')
       .attr('title', 'pause track')
 
-    audio.play()
+    currentTrack.play()
   }
 
   var pauseClicked = function (e) {
@@ -27,7 +27,7 @@ trackControls = (function () {
       .addClass('play')
       .attr('title', 'play track')
 
-    audio.pause()
+    currentTrack.pause()
   }
 
   var downloadClicked = function () {
@@ -42,6 +42,8 @@ trackControls = (function () {
       .delegate('.play', 'click', playClicked)
       .delegate('.pause', 'click', pauseClicked)
       .delegate('.download', 'click', downloadClicked)
+
+    Track.bind('loaded', loadTrack)
   }
 
   return {

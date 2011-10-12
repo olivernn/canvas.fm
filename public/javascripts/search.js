@@ -39,10 +39,11 @@ search = (function () {
   var init = function () {
     container = $('#search-results-container')
     container.delegate('li', 'click', trackSelected)
+
+    Track.bind('searched', displaySearchResults)
   }
 
   return {
-    init: init,
-    displayTracks: displaySearchResults,
+    init: init
   }
 })()
