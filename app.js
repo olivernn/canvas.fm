@@ -6,6 +6,7 @@ var express = require('express'),
     fs = require('fs'),
     Converter = require('./lib/converter'),
     Track = require('./lib/track'),
+    Resizer = require('./lib/resizer'),
     sendMainPage = function (req, res) {
       res.sendfile(__dirname + '/views/main.html')
     };
@@ -58,6 +59,18 @@ app.put('/tracks/:id', function (req, res) {
       res.end(JSON.stringify("{ok: true}"))
     })
     res.end()
+  })
+})
+
+app.get('/tracks/:id/image/:size', function (req, res) {
+  var track = Track.create({id: req.params.id}),
+      resizer = Resizer.create(req.params.size);
+
+  res.header('Cache-Control', 'public, max-age=2629743')
+
+  track.openImage(function (imageStream) {
+    imageStream.pipe(resizer.process.stdin)
+    resizer.process.stdout.pipe(res)
   })
 })
 
