@@ -57,7 +57,8 @@ var audio = (function () {
   }
 
   var audioEnded = function () {
-    // stuff that happens when the audio has ended
+    currentTrack.image(canvas.toBlob())
+    currentTrack.save()
   }
 
   var init = function () {

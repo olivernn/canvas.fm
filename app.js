@@ -1,9 +1,11 @@
 var express = require('express'),
-    app = express.createServer(),
+    form = require('connect-form'),
+    app = express.createServer(form({keepExtensions: true})),
     util = require('util'),
+    path = require('path'),
+    fs = require('fs'),
     Converter = require('./lib/converter'),
     Track = require('./lib/track'),
-    pathRegex = /^\/stream\/(\d+)/,
     sendMainPage = function (req, res) {
       res.sendfile(__dirname + '/views/main.html')
     };
@@ -27,25 +29,36 @@ app.get('/tracks/:id', sendMainPage)
 app.get('/search', sendMainPage)
 
 app.get('/stream/:track_id', function (request, response) {
-  var track = Track.create(request.params['track_id']),
+  var track = Track.create({id: request.params['track_id']}),
       converter = Converter.create();
 
   response.contentType('application/ogg')
 
-  track.get(function (trackStream) {
+  track.stream(function (trackStream) {
     trackStream.pipe(converter.process.stdin)
     converter.process.stdout.pipe(response)
   })
 
   request.on('close', function () {
-    track.stop()
+    track.stopStream()
     converter.kill()
     response.end()
   })
 })
 
 app.put('/tracks/:id', function (req, res) {
+  var uploadDirName = path.join(process.cwd(), 'uploads')
 
+  req.form.complete(function (err, fields, files) {
+    var track = Track.create(fields)
+    fs.rename(files.image.path, path.join(uploadDirName, req.params.id) + '.png', function (err) {
+      if (err) console.log(err)
+    })
+    track.save(function () {
+      res.end(JSON.stringify("{ok: true}"))
+    })
+    res.end()
+  })
 })
 
 app.listen(3000)

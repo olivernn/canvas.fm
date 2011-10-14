@@ -67,6 +67,10 @@ Track = (function () {
       return this.attributes.id
     },
 
+    title: function () {
+      return this.attributes.title
+    },
+
     src: function () {
       return ['/stream/', this.id()].join('')
     },
@@ -97,6 +101,29 @@ Track = (function () {
 
     bind: function (eventName, cb) {
       Track.bind.call(this, eventName, cb)
+    },
+
+    image: function (blob) {
+      if (blob) this.attributes.blob = blob
+      return this.attributes.blob
+    },
+
+    toFormData: function () {
+      var self = this
+      return ['id', 'title', 'artistName', 'image'].reduce(function (data, attrName) {
+        data.append(attrName, self[attrName]())
+        return data
+      }, new FormData ())
+    },
+
+    save: function () {
+      var deferred = new Deferred ()
+
+      xhr.put('/tracks/' + this.id(), {data: this.toFormData()}, function () {
+        console.log('done')
+      })
+
+      return deferred
     }
   }
 
