@@ -43,6 +43,11 @@ var audio = (function () {
     elem.pause()
   }
 
+  var pauseAndHide = function () {
+    pause()
+    canvas.hide()
+  }
+
   var loadTrack = function (track) {
     currentTrack = track
     prevTime = 0
@@ -68,6 +73,7 @@ var audio = (function () {
     elem.addEventListener('ended', audioEnded, false)
 
     Track.bind('loaded', loadTrack)
+    Track.bind('recents', pauseAndHide)
   }
 
   return {

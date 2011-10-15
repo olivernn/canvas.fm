@@ -36,6 +36,10 @@ trackControls = (function () {
     link.attr('title', currentTrack.fullTitle())
   }
 
+  var hideControls = function () {
+    container.empty()
+  }
+
   var init = function () {
     container = $("#track-controls-container")
     container
@@ -44,6 +48,7 @@ trackControls = (function () {
       .delegate('.download', 'click', downloadClicked)
 
     Track.bind('loaded', loadTrack)
+    Track.bind('recents', hideControls)
   }
 
   return {

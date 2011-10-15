@@ -71,6 +71,7 @@ header .controls a {
 
 footer {
   border-top: 3px solid #333;
+  clear: both;
 }
 
 #canvas-container {
@@ -80,4 +81,53 @@ footer {
 
 canvas {
   display: block;
+}
+
+#track-index {
+  margin-top: 40px;
+}
+
+#track-index li {
+  list-style: none;
+  float: left;
+  width: 341px;
+  margin-bottom: 60px;
+  cursor: pointer;
+}
+
+#track-index .left {
+  float: left;
+  width: 100px;
+  border-right: 2px solid #333;
+  padding-right: 10px;
+}
+
+#track-index .right {
+  float: left;
+  width: 209px;
+  padding: 0 10px;
+}
+
+#track-index ul {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 10px;
+}
+
+#track-index li img {
+  display: block;
+}
+
+#track-index li:hover h2 {
+  color: #ff6600;
+}
+
+#track-index h2 {
+  font-size: 1em;
+  margin-top:0;
+}
+#track-index h3 {
+  font-size: 0.9em;
+  font-weight: normal;
+  text-transform: uppercase;
 }

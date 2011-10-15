@@ -34,6 +34,7 @@ app.get('/stream/:track_id', function (request, response) {
       converter = Converter.create();
 
   response.contentType('application/ogg')
+  response.header('Access-Control-Allow-Origin', '*')
 
   track.stream(function (trackStream) {
     trackStream.pipe(converter.process.stdin)
@@ -59,6 +60,12 @@ app.put('/tracks/:id', function (req, res) {
       res.end(JSON.stringify("{ok: true}"))
     })
     res.end()
+  })
+})
+
+app.get('/tracks', function (req, res) {
+  Track.recent(function (tracks) {
+    res.json(tracks.map(function (track) { return track.asJSON() }))
   })
 })
 

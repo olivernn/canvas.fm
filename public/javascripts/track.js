@@ -38,6 +38,19 @@ Track = (function () {
     return deferred
   }
 
+  Track.recent = function () {
+    var deferred = new Deferred ()
+
+    $.get('/tracks', function (data) {
+      var tracks = data.map(function (attrs) { return new Track (attrs) })
+
+      Track.trigger('recents', tracks)
+      deferred.resolve(tracks)
+    })
+
+    return deferred
+  }
+
   Track._callbacks = {}
 
   Track.bind = function (eventName, fn) {
@@ -55,12 +68,13 @@ Track = (function () {
     asJSON: function () {
       return $.extend({}, this.attributes, {
         artistName: this.artistName(),
-        artworkUrl: this.artworkUrl()
+        artworkUrl: this.artworkUrl(),
+        thumbnail: this.thumbnail()
       })
     },
 
     artistName: function () {
-      return this.attributes.user.username
+      return this.attributes.artistName || this.attributes.user.username
     },
 
     id: function () {
@@ -73,6 +87,10 @@ Track = (function () {
 
     src: function () {
       return ['/stream/', this.id()].join('')
+    },
+
+    thumbnail: function () {
+      return ['/tracks', this.id(), 'image', 'small'].join('/')
     },
 
     duration: function () {

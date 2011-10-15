@@ -42,7 +42,7 @@
   width: 270px;
 }
 
-#search-results-container li .left:hover, #search-results-container li .right:hover {
+#search-results-container li:hover {
   cursor: pointer;
 }
 
@@ -58,6 +58,10 @@
   margin-bottom:5px;
   padding:0;
   font-size: 13px;
+}
+
+#search-results-container li:hover h3 {
+  color: #ff6600;
 }
 
 #search-results-container li h4 {

@@ -44,6 +44,11 @@ var canvas = (function () {
     _canvas.width = _canvas.width
     ctx.translate(512, 512)
     ctx.rotate(Math.PI)
+    $(_canvas).show()
+  }
+
+  var hide = function () {
+    $(_canvas).hide()
   }
 
   var init = function () {
@@ -59,6 +64,7 @@ var canvas = (function () {
     rotate: rotate,
     toPng: toPng,
     toBlob: toBlob,
-    reset: reset
+    reset: reset,
+    hide: hide
   }
 })()
