@@ -32,6 +32,10 @@ header h1 a {
   color: #333;
 }
 
+header h1 a span {
+  color: #ff6600;
+}
+
 header h2 {
   margin-top: 0px;
   padding-left: 4px;
@@ -39,8 +43,7 @@ header h2 {
 }
 
 header h2 a {
-  color: #ff6600;
-  text-decoration: none;
+  color: #333;
 }
 
 header h2 a:hover {
