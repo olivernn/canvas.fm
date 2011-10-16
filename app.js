@@ -49,18 +49,14 @@ app.get('/stream/:track_id', function (request, response) {
 })
 
 app.put('/tracks/:id', function (req, res) {
-  var uploadDirName = path.join(process.cwd(), 'uploads')
-
   req.form.complete(function (err, fields, files) {
-    var track = Track.create(fields)
-    fs.rename(files.image.path, path.join(uploadDirName, req.params.id) + '.png', function (err) {
-      if (err) console.log(err)
+    var track = Track.create(fields, files)
+
+    track.save(function (err) {
+      !!err ? res.end('error') : res.json({ok: true})
     })
-    track.save(function () {
-      res.end(JSON.stringify("{ok: true}"))
-    })
-    res.end()
   })
+
 })
 
 app.get('/tracks', function (req, res) {
