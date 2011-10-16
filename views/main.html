@@ -103,38 +103,6 @@
     <script src="/javascripts/track_index.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/mustache.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/poirot.js" type="text/javascript" charset="utf-8"></script>
-
-    <script type="text/javascript" charset="utf-8">
-
-      var setupDownloadLink = function () {
-        var link = document.getElementById('download')
-        link.href = canvas.toPng()
-      }
-
-      var app = Davis(function () {
-
-        this.get('/', function (req) {
-          Track.recent()
-        })
-
-        this.get('/search', function (req) {
-          Track.search(req.params['query'])
-        })
-
-        this.get('/tracks/:track_id', function (req) {
-          Track.load(req.params['track_id'])
-        })
-
-        this.bind('start', function () {
-          audio.init()
-          canvas.init()
-          search.init()
-          trackControls.init()
-          trackIndex.init()
-        })
-      })
-
-      app.start()
-    </script>
+    <script src="/javascripts/app.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>
