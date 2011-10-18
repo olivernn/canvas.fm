@@ -66,11 +66,17 @@ var audio = (function () {
     currentTrack.save()
   }
 
+  var displayUnsupportedMessage = function () {
+    $("#unsupported").show()
+  }
+
   var init = function () {
     elem = document.getElementById('audio')
     elem.addEventListener('MozAudioAvailable', audioAvailable, false);
     elem.addEventListener('loadedmetadata', loadedMetaData, false);
     elem.addEventListener('ended', audioEnded, false)
+
+    if (!elem.mozWriteAudio) displayUnsupportedMessage()
 
     Track.bind('loaded', loadTrack)
     Track.bind('recents', pauseAndHide)

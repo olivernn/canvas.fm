@@ -134,3 +134,7 @@ canvas {
   font-weight: normal;
   text-transform: uppercase;
 }
+
+#unsupported {
+  display: none;
+}
