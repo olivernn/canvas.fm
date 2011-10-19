@@ -1,0 +1,3 @@
+ln -s $SHARED/uploads uploads
+sudo stop canvas.js
+sudo start canvas.js
