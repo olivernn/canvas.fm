@@ -1,9 +1,11 @@
 { "name" : "canvas.fm",
+  "version" : "0.0.1",
   "description" : "Canvas visualisation of the soundcloud api.",
   "author" : "Oliver Nightingale",
   "main" : "./app.js",
   "dependencies" : {
-    "express" : ">= 2.4",
-    "mysql"
+    "express" : "2.4.7",
+    "mysql" : "0.9.3",
+    "connect-form" : "0.2.1"
   }
 }
