@@ -44,7 +44,6 @@ app.get('/stream/:track_id', function (request, response) {
   request.on('close', function () {
     track.stopStream()
     converter.kill()
-    response.end()
   })
 })
 
