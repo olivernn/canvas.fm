@@ -9,13 +9,6 @@ body {
   position: relative;
 }
 
-#search img {
-  width: 40px;
-  float:left;
-  margin-top: 3px;
-  margin-right: 5px;
-}
-
 header {
   border-top: 3px solid #333;
   margin-bottom: 10px;

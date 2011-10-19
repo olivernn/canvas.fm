@@ -28,10 +28,12 @@ Track = (function () {
     var deferred = new Deferred (),
         path = ['/tracks?q=', q].join('');
 
+    Track.trigger('searchStart')
+
     SC.get(path, function (data) {
       var tracks = data.map(function (attrs) { return new Track (attrs) })
 
-      Track.trigger('searched', tracks)
+      Track.trigger('searchEnd', tracks)
       deferred.resolve(tracks)
     })
 

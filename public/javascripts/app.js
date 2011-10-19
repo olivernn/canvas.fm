@@ -18,6 +18,7 @@ var app = Davis(function () {
     search.init()
     trackControls.init()
     trackIndex.init()
+    spinner.init()
   })
 })
 

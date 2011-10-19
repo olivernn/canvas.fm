@@ -22,3 +22,56 @@
   -moz-border-radius: 2px;
   cursor: pointer;
 }
+
+#search img {
+  width: 40px;
+  float:left;
+  margin-top: 3px;
+  margin-right: 5px;
+  background: url();
+}
+
+@-webkit-keyframes throb {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes throb {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+#search img.throb {
+  -webkit-animation-name: throb;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-name: throb;
+  -moz-animation-duration: 1s;
+  -moz-animation-iteration-count: infinite;
+}

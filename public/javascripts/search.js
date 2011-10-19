@@ -40,7 +40,7 @@ search = (function () {
     container = $('#search-results-container')
     container.delegate('li', 'click', trackSelected)
 
-    Track.bind('searched', displaySearchResults)
+    Track.bind('searchEnd', displaySearchResults)
   }
 
   return {
