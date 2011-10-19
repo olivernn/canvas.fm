@@ -1,3 +1,2 @@
-sudo ln -s $SHARED/uploads uploads
 sudo stop canvas.fm
 sudo start canvas.fm
