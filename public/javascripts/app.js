@@ -1,5 +1,7 @@
 var app = Davis(function () {
 
+  this.use(Davis.googleAnalytics)
+
   this.get('/', function (req) {
     Track.recent()
   })

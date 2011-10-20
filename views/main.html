@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Canvas.FM</title>
+    <title>Canvas.fm</title>
     <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/stylesheets/results.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/stylesheets/track_controls.css" type="text/css" media="screen" charset="utf-8">
@@ -50,6 +50,20 @@
         {{/tracks}}
       </ul>
     </script>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25695442-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
   </head>
   <body>
     <div id="wrap">
@@ -72,7 +86,7 @@
       <section id="canvas-container">
         <div id="unsupported">
           <h3>Sorry, your browser doesn't provide enough awesome to fully display this visualisation ☹</h3>
-          <p>You need to be using a recent version of FireFox; grab a copy <a target="_blank" href="http://www.mozilla.org/en-US/firefox/new/">here.</a></p>
+          <p>You need to be using a recent version of Firefox; grab a copy <a target="_blank" href="http://www.mozilla.org/en-US/firefox/new/">here.</a></p>
         </div>
 
         <canvas id="circle" width="1024" height="1024"></canvas>
@@ -97,6 +111,7 @@
 
     <script src="/javascripts/supplement-0.1.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/davis-0.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/davis.google_analytics.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/dsp.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/xhr.js" type="text/javascript" charset="utf-8"></script>
     <script src="/javascripts/audio.js" type="text/javascript" charset="utf-8"></script>
