@@ -29,6 +29,10 @@ app.get('/', sendMainPage)
 app.get('/tracks/:id', sendMainPage)
 app.get('/search', sendMainPage)
 
+app.error(function (err, req, res) {
+  res.end('error')
+})
+
 app.get('/stream/:track_id', function (request, response) {
   var track = Track.create({id: request.params['track_id']}),
       converter = Converter.create();
@@ -52,14 +56,15 @@ app.put('/tracks/:id', function (req, res) {
     var track = Track.create(fields, files)
 
     track.save(function (err) {
-      !!err ? res.end('error') : res.json({ok: true})
+      !!err ? throw(err) : res.json({ok: true})
     })
   })
 
 })
 
 app.get('/tracks', function (req, res) {
-  Track.recent(function (tracks) {
+  Track.recent(function (err, tracks) {
+    if (err) throw(err)
     res.json(tracks.map(function (track) { return track.asJSON() }))
   })
 })
