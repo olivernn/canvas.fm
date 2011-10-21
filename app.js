@@ -56,7 +56,8 @@ app.put('/tracks/:id', function (req, res) {
     var track = Track.create(fields, files)
 
     track.save(function (err) {
-      !!err ? throw(err) : res.json({ok: true})
+      if (err) throw(err)
+      res.json({ok: true})
     })
   })
 
