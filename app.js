@@ -16,7 +16,7 @@ app.configure(function () {
   app.use(express.bodyParser());
   app.use(express.static(__dirname + '/public'));
   app.use(express.logger({
-    'format': ':method :url :status - :response-time ms'
+    'format': ':date :method :url :status - :response-time ms'
   }))
   app.use(app.router);
 });
@@ -25,13 +25,13 @@ app.configure('development', function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+app.configure('production', function () {
+  app.use(express.errorHandler())
+})
+
 app.get('/', sendMainPage)
 app.get('/tracks/:id', sendMainPage)
 app.get('/search', sendMainPage)
-
-app.error(function (err, req, res) {
-  res.end('error')
-})
 
 app.get('/stream/:track_id', function (request, response) {
   var track = Track.create({id: request.params['track_id']}),
@@ -83,3 +83,4 @@ app.get('/tracks/:id/image/:size', function (req, res) {
 })
 
 app.listen(3000)
+console.log(new Date, 'Canvas.fm starting')
