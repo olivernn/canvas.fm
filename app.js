@@ -40,7 +40,9 @@ app.get('/stream/:track_id', function (request, response) {
   response.contentType('application/ogg')
   response.header('Access-Control-Allow-Origin', '*')
 
-  track.stream(function (trackStream) {
+  track.stream(function (err, trackStream) {
+    if (err) throw(err)
+
     trackStream.pipe(converter.process.stdin)
     converter.process.stdout.pipe(response)
   })
