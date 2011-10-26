@@ -41,6 +41,7 @@ search = (function () {
     container.delegate('li', 'click', trackSelected)
 
     Track.bind('searchEnd', displaySearchResults)
+    Track.bind('recents', closeSearchResults)
   }
 
   return {
