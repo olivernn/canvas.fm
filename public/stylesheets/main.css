@@ -70,6 +70,23 @@ footer {
   clear: both;
 }
 
+footer ul {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+footer li {
+  font-size: 0.9em;
+  margin-right: 10px;
+  float: left;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: #ff6600;
+}
+
 #canvas-container {
   display:block;
   margin: 20px 0px;
