@@ -23,5 +23,3 @@ var app = Davis(function () {
     spinner.init()
   })
 })
-
-app.start()
