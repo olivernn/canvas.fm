@@ -4,8 +4,11 @@
   "author" : "Oliver Nightingale",
   "main" : "./app.js",
   "dependencies" : {
-    "express" : "2.4.7",
+    "express" : "2.5.9",
     "mysql" : "0.9.3",
     "connect-form" : "0.2.1"
+  },
+  "engine": {
+    "node": "0.6.x"
   }
 }
