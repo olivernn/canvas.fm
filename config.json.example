@@ -1,0 +1,9 @@
+{
+  "development": {
+    "soundcloud_api_key": "SOUNDCLOUD API KEY",
+    "database": {
+      "user": "USERNAME",
+      "name": "DATABASE NAME"
+    }
+  }
+}
